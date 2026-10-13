@@ -4,6 +4,8 @@ import '../../widgets/empty_state.dart';
 import '../../widgets/error_state.dart';
 import '../../../models/product_model.dart';
 import '../../../core/providers/product_provider.dart';
+import '../../../core/providers/auth_provider.dart';
+import '../../../core/providers/notification_provider.dart';
 import 'package:sabix_cliente_app/core/config/app_colors.dart';
 import 'package:sabix_cliente_app/presentation/widgets/home/widgets/search_bar.dart';
 import 'package:sabix_cliente_app/presentation/widgets/home/widgets/home_header.dart';
@@ -46,6 +48,11 @@ class _HomeContentState extends State<HomeContent> {
       final p = context.read<ProductProvider>();
       p.fetchCategories();
       p.searchProducts('');
+
+      final userId = context.read<AuthProvider>().currentUser?.id;
+      if (userId != null) {
+        context.read<NotificationProvider>().initialize(userId);
+      }
     });
   }
 
