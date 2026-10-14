@@ -65,4 +65,29 @@ class ApiEndpoints {
 
   static String productDetail(String productId) =>
       '$_base/products/products/$productId/';
+
+  // ============================================
+  // CHAT - CONVERSACIONES Y MENSAJES
+  // ============================================
+  static String conversations = '$_base/chat/conversations/';
+
+  static String conversationByOrder(String orderId) =>
+      '$_base/chat/conversations/by-order/$orderId/';
+
+  static String messages(String conversationId) =>
+      '$_base/chat/conversations/$conversationId/messages/';
+
+  static String sendMessage(String conversationId) =>
+      '$_base/chat/conversations/$conversationId/messages/';
+
+  static String markAsRead(String conversationId, String messageId) =>
+      '$_base/chat/conversations/$conversationId/messages/$messageId/read/';
+
+  static String totalUnread = '$_base/chat/conversations/unread-count/';
+
+  static String requestSupport(String conversationId) =>
+      '$_base/chat/conversations/$conversationId/request-support/';
+
+  static String closeConversation(String conversationId) =>
+      '$_base/chat/conversations/$conversationId/close/';
 }
