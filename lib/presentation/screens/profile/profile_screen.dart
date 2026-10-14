@@ -74,6 +74,11 @@ class ProfileScreen extends StatelessWidget {
                   label: 'Historial de pedidos',
                   onTap: () => context.goToOrders(),
                 ),
+                ProfileOptionTile(
+                  icon: Icons.chat_bubble_outline_rounded,
+                  label: 'Mis mensajes',
+                  onTap: () => context.goToChatList(),
+                ),
               ],
             ),
 

@@ -4,7 +4,10 @@ import '../../widgets/error_state.dart';
 import 'package:go_router/go_router.dart';
 import '../../../models/order_model.dart';
 import '../../../core/config/app_colors.dart';
+import '../../../core/providers/auth_provider.dart';
+import '../../../core/providers/chat_provider.dart';
 import '../../../core/providers/order_provider.dart';
+import '../../routes/app_routes.dart';
 import '../../widgets/orders/order_detail_content.dart';
 
 class OrderDetailScreen extends StatefulWidget {
@@ -17,6 +20,7 @@ class OrderDetailScreen extends StatefulWidget {
 
 class _OrderDetailScreenState extends State<OrderDetailScreen> {
   bool _isLoading = true;
+  bool _isOpeningChat = false;
   Order? _order;
   String? _error;
 
@@ -47,6 +51,50 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
         _error = e.toString();
         _isLoading = false;
       });
+    }
+  }
+
+  Future<void> _openChatWithDelivery() async {
+    final order = _order;
+    if (order == null || _isOpeningChat) return;
+
+    setState(() => _isOpeningChat = true);
+    try {
+      final jwtToken = context.read<AuthProvider>().currentUser?.token ?? '';
+      final conversation = await context.read<ChatProvider>().getOrCreateByOrder(
+        order.id.toString(),
+      );
+
+      if (!mounted) return;
+
+      if (conversation == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('No se pudo abrir el chat con el repartidor'),
+          ),
+        );
+        return;
+      }
+
+      context.push(
+        AppRouter.chat,
+        extra: {
+          'conversationId': conversation.id,
+          'orderId': conversation.orderId.isEmpty
+              ? order.id.toString()
+              : conversation.orderId,
+          'title': conversation.title,
+          'jwtToken': jwtToken,
+        },
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error al abrir el chat: $e')),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isOpeningChat = false);
     }
   }
 
@@ -93,7 +141,11 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                   : _error != null
                   ? ErrorState(message: _error!, onRetry: _loadOrder)
                   : _order != null
-                  ? OrderDetailContent(order: _order!)
+                  ? OrderDetailContent(
+                      order: _order!,
+                      onChatWithDelivery: _openChatWithDelivery,
+                      isOpeningChat: _isOpeningChat,
+                    )
                   : const Center(child: Text('Pedido no encontrado')),
             ),
           ],

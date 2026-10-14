@@ -5,6 +5,7 @@ import '../../widgets/error_state.dart';
 import '../../../models/product_model.dart';
 import '../../../core/providers/product_provider.dart';
 import '../../../core/providers/auth_provider.dart';
+import '../../../core/providers/chat_provider.dart';
 import '../../../core/providers/notification_provider.dart';
 import 'package:sabix_cliente_app/core/config/app_colors.dart';
 import 'package:sabix_cliente_app/presentation/widgets/home/widgets/search_bar.dart';
@@ -53,6 +54,9 @@ class _HomeContentState extends State<HomeContent> {
       if (userId != null) {
         context.read<NotificationProvider>().initialize(userId);
       }
+
+      // Carga las conversaciones para mostrar el contador de no leídos del chat
+      context.read<ChatProvider>().fetchConversations();
     });
   }
 

@@ -11,20 +11,24 @@ class ChatSocketService {
 
     // Obtener la URL base definida en el .env
     final baseUrl = dotenv.env['BASE_URL'] ?? '';
+    if (baseUrl.isEmpty || conversationId.isEmpty) {
+      debugPrint('ChatSocketService: BASE_URL o conversationId vacíos');
+      return;
+    }
 
-    // Limpieza de esquemas (http:// o https://) y barras finales para extraer solo el host
-    final cleanHost = baseUrl
-        .replaceAll('https://', '')
-        .replaceAll('http://', '')
-        .split('/')[0]
-        .split(':')[0];
+    // Construye la URI del WebSocket conservando host y puerto, y usa ws/wss
+    // según el esquema de BASE_URL (igual que NotificationSocketService).
+    final baseUri = Uri.parse(baseUrl);
+    final wsUri = baseUri.replace(
+      scheme: baseUri.scheme == 'https' ? 'wss' : 'ws',
+      path: '/ws/chat/$conversationId/',
+      queryParameters: {'token': token},
+    );
 
-    final wsUrl = 'wss://$cleanHost/ws/chat/$conversationId/?token=$token';
-
-    debugPrint('Conectando a WebSocket: $wsUrl');
+    debugPrint('Conectando a WebSocket: $wsUri');
 
     try {
-      _channel = IOWebSocketChannel.connect(Uri.parse(wsUrl));
+      _channel = IOWebSocketChannel.connect(wsUri);
       _channel?.stream.listen(
         (data) {
           debugPrint('WebSocket Evento Recibido: $data');

@@ -7,8 +7,15 @@ import 'package:sabix_cliente_app/presentation/widgets/orders/rder_info_row.dart
 
 class OrderDetailContent extends StatelessWidget {
   final Order order;
+  final VoidCallback? onChatWithDelivery;
+  final bool isOpeningChat;
 
-  const OrderDetailContent({super.key, required this.order});
+  const OrderDetailContent({
+    super.key,
+    required this.order,
+    this.onChatWithDelivery,
+    this.isOpeningChat = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +27,11 @@ class OrderDetailContent extends StatelessWidget {
           _buildHeader(),
           const SizedBox(height: 24),
           _buildInfoSection(),
+          // El botón de chat solo aparece cuando hay un repartidor asignado
+          if (order.deliveryPerson != null) ...[
+            const SizedBox(height: 20),
+            _buildDeliveryPersonSection(),
+          ],
           const SizedBox(height: 20),
           if (order.items != null) ...[
             _buildProductsSection(),
@@ -164,6 +176,97 @@ class OrderDetailContent extends StatelessWidget {
     }
 
     return _buildSection(title: 'Información del pedido', children: rows);
+  }
+
+  // ─── Repartidor asignado ──────────────────────────
+  Widget _buildDeliveryPersonSection() {
+    final deliveryName = order.deliveryPersonName?.isNotEmpty == true
+        ? order.deliveryPersonName!
+        : 'Repartidor';
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: AppColors.primary.withOpacity(0.15)),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.primary.withOpacity(0.06),
+            blurRadius: 12,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 24,
+            backgroundColor: AppColors.primary.withOpacity(0.1),
+            child: const Icon(
+              Icons.delivery_dining_rounded,
+              color: AppColors.primary,
+              size: 26,
+            ),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Repartidor',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.textSecondary,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  deliveryName,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.textPrimary,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          SizedBox(
+            height: 42,
+            child: ElevatedButton.icon(
+              onPressed: isOpeningChat ? null : onChatWithDelivery,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
+                disabledBackgroundColor: AppColors.primary.withOpacity(0.6),
+                elevation: 0,
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              icon: isOpeningChat
+                  ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
+                    )
+                  : const Icon(Icons.chat_bubble_outline_rounded, size: 18),
+              label: Text(isOpeningChat ? 'Abriendo...' : 'Chatear'),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   // ─── Productos ─────────────────────────────────────
