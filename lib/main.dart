@@ -10,6 +10,9 @@ import 'core/providers/product_provider.dart';
 import 'core/services/local_storage_service.dart';
 import 'core/providers/connectivity_provider.dart';
 import 'package:sabix_cliente_app/core/providers/order_provider.dart';
+import 'package:sabix_cliente_app/core/providers/chat_provider.dart';
+import 'package:sabix_cliente_app/core/services/chat_service.dart';
+import 'package:sabix_cliente_app/core/network/api_client.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +34,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ProductProvider()),
         ChangeNotifierProvider(create: (_) => OrderProvider()),
         ChangeNotifierProvider(create: (_) => CartProvider()..loadCart()),
+        ChangeNotifierProvider(
+          create: (_) => ChatProvider(ChatService(ApiClient())),
+        ),
       ],
       child: MaterialApp.router(
         title: 'Sabix Cliente',

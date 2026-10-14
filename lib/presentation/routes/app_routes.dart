@@ -12,6 +12,8 @@ import '../../core/providers/auth_provider.dart';
 import '../screens/orders/orders_list_screen.dart';
 import '../screens/orders/order_detail_screen.dart';
 import '../screens/products/product_detail_screen.dart'; // ← NUEVO
+import '../screens/chat/chat_screen.dart';
+import '../screens/chat/chat_list_screen.dart';
 
 class AppRouter {
   static const String splash = '/';
@@ -23,6 +25,8 @@ class AppRouter {
   static const String cart = '/cart';
   static const String profile = '/profile';
   static const String productDetail = '/product-detail'; // ← NUEVO
+  static const String chatList = '/chat-list';
+  static const String chat = '/chat';
 
   static GoRouter router = GoRouter(
     initialLocation: splash,
@@ -93,6 +97,31 @@ class AppRouter {
         },
         redirect: _authGuard,
       ),
+      GoRoute(
+        path: chatList,
+        name: 'chatList',
+        builder: (context, state) => const ChatListScreen(),
+        redirect: _authGuard,
+      ),
+      GoRoute(
+        path: chat,
+        name: 'chat',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          if (extra == null) {
+            return const Scaffold(
+              body: Center(child: Text('Conversación no encontrada')),
+            );
+          }
+          return ChatScreen(
+            conversationId: extra['conversationId'].toString(),
+            orderId: extra['orderId'].toString(),
+            title: extra['title'].toString(),
+            jwtToken: extra['jwtToken'].toString(),
+          );
+        },
+        redirect: _authGuard,
+      ),
     ],
     redirect: (context, state) {
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
@@ -127,6 +156,8 @@ extension GoRouterExtension on GoRouter {
   void goToProfile() => go(AppRouter.profile);
   void goToProductDetail(ProductModel product) => // ← NUEVO
       push(AppRouter.productDetail, extra: product);
+  void goToChatList() => push(AppRouter.chatList);
+  void goToChat(Map<String, dynamic> extra) => push(AppRouter.chat, extra: extra);
   void goBack() => pop();
 }
 
@@ -140,4 +171,6 @@ extension BuildContextGoRouterExtension on BuildContext {
   void goToProfile() => go(AppRouter.profile);
   void goToProductDetail(ProductModel product) => // ← NUEVO
       push(AppRouter.productDetail, extra: product);
+  void goToChatList() => push(AppRouter.chatList);
+  void goToChat(Map<String, dynamic> extra) => push(AppRouter.chat, extra: extra);
 }
