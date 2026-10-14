@@ -8,6 +8,7 @@ import '../screens/cart/cart_screen.dart';
 import '../screens/auth/login_screen.dart';
 import '../screens/auth/register_screen.dart';
 import '../screens/profile/profile_screen.dart';
+import '../screens/notifications/notifications_screen.dart';
 import '../../core/providers/auth_provider.dart';
 import '../screens/orders/orders_list_screen.dart';
 import '../screens/orders/order_detail_screen.dart';
@@ -24,6 +25,7 @@ class AppRouter {
   static const String orderDetail = '/order/:id';
   static const String cart = '/cart';
   static const String profile = '/profile';
+  static const String notifications = '/notifications';
   static const String productDetail = '/product-detail'; // ← NUEVO
   static const String chatList = '/chat-list';
   static const String chat = '/chat';
@@ -80,6 +82,12 @@ class AppRouter {
         path: profile,
         name: 'profile',
         builder: (context, state) => const ProfileScreen(),
+        redirect: _authGuard,
+      ),
+      GoRoute(
+        path: notifications,
+        name: 'notifications',
+        builder: (context, state) => const NotificationsScreen(),
         redirect: _authGuard,
       ),
       // ← NUEVA RUTA PARA DETALLE DE PRODUCTO
@@ -154,6 +162,7 @@ extension GoRouterExtension on GoRouter {
   void goToOrderDetail(String id) => go('/order/$id');
   void goToCart() => go(AppRouter.cart);
   void goToProfile() => go(AppRouter.profile);
+  void goToNotifications() => push(AppRouter.notifications);
   void goToProductDetail(ProductModel product) => // ← NUEVO
       push(AppRouter.productDetail, extra: product);
   void goToChatList() => push(AppRouter.chatList);
@@ -169,6 +178,7 @@ extension BuildContextGoRouterExtension on BuildContext {
   void goToOrderDetail(String id) => go('/order/$id');
   void goToCart() => go(AppRouter.cart);
   void goToProfile() => go(AppRouter.profile);
+  void goToNotifications() => push(AppRouter.notifications);
   void goToProductDetail(ProductModel product) => // ← NUEVO
       push(AppRouter.productDetail, extra: product);
   void goToChatList() => push(AppRouter.chatList);

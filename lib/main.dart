@@ -9,6 +9,7 @@ import 'presentation/routes/app_routes.dart';
 import 'core/providers/product_provider.dart';
 import 'core/services/local_storage_service.dart';
 import 'core/providers/connectivity_provider.dart';
+import 'core/providers/notification_provider.dart';
 import 'package:sabix_cliente_app/core/providers/order_provider.dart';
 import 'package:sabix_cliente_app/core/providers/chat_provider.dart';
 import 'package:sabix_cliente_app/core/services/chat_service.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ConnectivityProvider()),
         ChangeNotifierProvider(create: (_) => ProductProvider()),
         ChangeNotifierProvider(create: (_) => OrderProvider()),
+        ChangeNotifierProvider(create: (_) => NotificationProvider()),
         ChangeNotifierProvider(create: (_) => CartProvider()..loadCart()),
         ChangeNotifierProvider(
           create: (_) => ChatProvider(ChatService(ApiClient())),

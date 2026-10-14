@@ -31,6 +31,17 @@ class ApiEndpoints {
   static String refreshToken = '$_base/users/token/refresh/';
 
   // ============================================
+  // NOTIFICACIONES
+  // ============================================
+  static String notifications = '$_base/notifications/';
+  static String unreadNotifications = '$_base/notifications/unread/';
+  static String unreadNotificationCount = '$_base/notifications/unread/count/';
+  static String notificationDetail(int id) => '$_base/notifications/$id/';
+  static String markNotificationRead(int id) =>
+      '$_base/notifications/$id/read/';
+  static String markAllNotificationsRead = '$_base/notifications/read-all/';
+
+  // ============================================
   // USER - PERFIL
   // ============================================
   static String profile = '$_base/users/profile/';
