@@ -20,7 +20,7 @@ flutter analyze
 
 La dirección `.invalid` es ficticia. No añadir tokens de Slack, Trello ni
 credenciales de producción: `.env` se empaqueta con la aplicación.
-El futuro workflow deberá crear este archivo temporal desde el fixture.
+El workflow crea este archivo temporal desde el fixture.
 
 ## Alcance
 
@@ -35,4 +35,5 @@ del dispositivo. No prueban login real, pedidos ni chat. Los componentes
 probados no necesitan cargar dotenv en memoria; el fixture satisface el
 recurso declarado por Flutter.
 
-GitHub Actions y los avisos Slack/Trello quedan para un cambio posterior.
+La configuración de GitHub Actions y los avisos Slack/Trello se explica en
+[devops.md](devops.md). Los secretos deben guardarse en GitHub para activar los envíos.

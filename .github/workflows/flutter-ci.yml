@@ -1,0 +1,81 @@
+name: Sabix Flutter CI
+
+on:
+  push:
+  pull_request:
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Flutter analyze y test
+    if: ${{ github.event.deleted != true }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      analyze: ${{ steps.analyze.outcome }}
+      tests: ${{ steps.tests.outcome }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
+        with:
+          flutter-version: '3.44.6'
+          channel: stable
+      - name: Preparar configuración ficticia
+        run: cp test/fixtures/env.test .env
+      - name: Resolver dependencias
+        run: flutter pub get
+      - name: Comprobar el código de avisos sin enviar mensajes
+        run: python3 -m unittest discover -s .github/scripts -p test_notify.py -v
+      - name: Analizar toda la aplicación
+        id: analyze
+        continue-on-error: true
+        run: flutter analyze
+      - name: Ejecutar todas las pruebas
+        id: tests
+        if: ${{ !cancelled() && steps.analyze.outcome != 'skipped' }}
+        continue-on-error: true
+        run: flutter test
+      - name: Publicar resumen y conservar fallos
+        if: always()
+        env:
+          ANALYZE: ${{ steps.analyze.outcome }}
+          TESTS: ${{ steps.tests.outcome }}
+        run: |
+          printf '## Sabix Cliente\n\n- flutter analyze: %s\n- flutter test: %s\n' "$ANALYZE" "$TESTS" >> "$GITHUB_STEP_SUMMARY"
+          test "$ANALYZE" = success && test "$TESTS" = success
+
+  notify:
+    name: Avisos Slack y Trello
+    needs: checks
+    # Los forks ejecutan pruebas pero nunca reciben secretos ni ejecutan este job.
+    if: >-
+      ${{ always() && !cancelled() && github.event.deleted != true &&
+          (github.event_name != 'pull_request' ||
+           github.event.pull_request.head.repo.full_name == github.repository) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          sparse-checkout: .github/scripts
+      - name: Enviar resultados
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          TRELLO_API_KEY: ${{ secrets.TRELLO_API_KEY }}
+          TRELLO_API_TOKEN: ${{ secrets.TRELLO_API_TOKEN }}
+          TRELLO_BOARD: wmXiYYHQ
+          CI_RESULT: ${{ needs.checks.result }}
+          ANALYZE_RESULT: ${{ needs.checks.outputs.analyze }}
+          TEST_RESULT: ${{ needs.checks.outputs.tests }}
+        run: python3 .github/scripts/notify.py
