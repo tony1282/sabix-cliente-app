@@ -29,7 +29,7 @@ class OrderFilterChip extends StatelessWidget {
           boxShadow: selected
               ? [
                   BoxShadow(
-                    color: AppColors.primary.withOpacity(0.2),
+                    color: AppColors.primary.withAlpha(51),
                     blurRadius: 8,
                     offset: const Offset(0, 3),
                   ),

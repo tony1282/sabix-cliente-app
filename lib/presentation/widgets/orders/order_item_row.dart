@@ -28,7 +28,7 @@ class OrderItemRow extends StatelessWidget {
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: AppColors.primary.withOpacity(0.2),
+                color: AppColors.primary.withAlpha(51),
                 blurRadius: 6,
                 offset: const Offset(0, 2),
               ),

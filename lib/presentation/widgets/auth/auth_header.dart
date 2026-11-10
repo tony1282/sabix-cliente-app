@@ -42,7 +42,7 @@ class AuthHeader extends StatelessWidget {
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.15),
+                    color: Colors.black.withAlpha(38),
                     blurRadius: 20,
                     offset: const Offset(0, 8),
                   ),
@@ -52,7 +52,7 @@ class AuthHeader extends StatelessWidget {
                 child: Image.asset(
                   imagePath,
                   fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Icon(
+                  errorBuilder: (_, _, _) => Icon(
                     Icons.shopping_bag_rounded,
                     size: imageSize * 0.5,
                     color: AppColors.primary,
@@ -75,7 +75,7 @@ class AuthHeader extends StatelessWidget {
               subtitle,
               style: TextStyle(
                 fontSize: 13,
-                color: Colors.white.withOpacity(0.85),
+                color: Colors.white.withAlpha(217),
               ),
               textAlign: TextAlign.center,
             ),

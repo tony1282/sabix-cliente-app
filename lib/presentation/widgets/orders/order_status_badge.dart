@@ -10,9 +10,9 @@ class OrderStatusBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       decoration: BoxDecoration(
-        color: _getColor().withOpacity(0.1),
+        color: _getColor().withAlpha(26),
         borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: _getColor().withOpacity(0.2), width: 1),
+        border: Border.all(color: _getColor().withAlpha(51), width: 1),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

@@ -32,7 +32,7 @@ class ProfileHeader extends StatelessWidget {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.15),
+                      color: Colors.black.withAlpha(38),
                       blurRadius: 20,
                       offset: const Offset(0, 6),
                     ),
@@ -43,7 +43,7 @@ class ProfileHeader extends StatelessWidget {
                         child: Image.network(
                           user!.profileImage!,
                           fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => _avatarIcon(),
+                          errorBuilder: (_, _, _) => _avatarIcon(),
                         ),
                       )
                     : _avatarIcon(),
@@ -62,7 +62,7 @@ class ProfileHeader extends StatelessWidget {
                 user?.email ?? '',
                 style: TextStyle(
                   fontSize: 13,
-                  color: Colors.white.withOpacity(0.85),
+                  color: Colors.white.withAlpha(217),
                 ),
               ),
               const SizedBox(height: 10),
@@ -72,7 +72,7 @@ class ProfileHeader extends StatelessWidget {
                   vertical: 5,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withAlpha(51),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(

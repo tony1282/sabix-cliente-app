@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen>
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.15),
+                          color: Colors.black.withAlpha(38),
                           blurRadius: 30,
                           offset: const Offset(0, 10),
                         ),
@@ -77,7 +77,7 @@ class _SplashScreenState extends State<SplashScreen>
                       child: Image.asset(
                         'assets/images/logo.jpg',
                         fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) => const Icon(
+                        errorBuilder: (_, _, _) => const Icon(
                           Icons.shopping_bag_rounded,
                           size: 50,
                           color: AppColors.primary,
@@ -100,7 +100,7 @@ class _SplashScreenState extends State<SplashScreen>
                     'Tu comida favorita, a tu puerta',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.white.withOpacity(0.85),
+                      color: Colors.white.withAlpha(217),
                       letterSpacing: 0.5,
                     ),
                   ),
@@ -111,7 +111,7 @@ class _SplashScreenState extends State<SplashScreen>
                     child: CircularProgressIndicator(
                       strokeWidth: 2.5,
                       valueColor: AlwaysStoppedAnimation<Color>(
-                        Colors.white.withOpacity(0.7),
+                        Colors.white.withAlpha(179),
                       ),
                     ),
                   ),

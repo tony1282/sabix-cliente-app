@@ -115,7 +115,7 @@ class _ConversationTile extends StatelessWidget {
       contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
       leading: CircleAvatar(
         radius: 24,
-        backgroundColor: AppColors.primary.withOpacity(0.1),
+        backgroundColor: AppColors.primary.withAlpha(26),
         child: const Icon(
           Icons.chat_bubble_outline_rounded,
           color: AppColors.primary,

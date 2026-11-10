@@ -1,8 +1,6 @@
 import '../../routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:go_router/go_router.dart';
-import '../../../core/config/app_colors.dart';
 import 'package:sabix_cliente_app/core/providers/auth_provider.dart';
 import 'package:sabix_cliente_app/presentation/widgets/profile/profile_header.dart';
 import 'package:sabix_cliente_app/presentation/widgets/profile/profile_section.dart';

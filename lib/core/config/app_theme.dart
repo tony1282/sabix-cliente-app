@@ -133,7 +133,7 @@ class AppTheme {
           letterSpacing: 0.5,
         ),
         elevation: 2,
-        shadowColor: AppColors.primary.withOpacity(0.3),
+        shadowColor: AppColors.primary.withAlpha(77),
       ),
     ),
     

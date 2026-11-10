@@ -66,7 +66,7 @@ class ProductDetailScreen extends StatelessWidget {
                               height: 280,
                               width: double.infinity,
                               fit: BoxFit.cover,
-                              errorBuilder: (_, __, ___) => _placeholder(280),
+                              errorBuilder: (_, _, _) => _placeholder(280),
                             )
                           : _placeholder(280),
                     ),

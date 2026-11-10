@@ -1,7 +1,6 @@
 import '../../routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:go_router/go_router.dart';
 import '../../../core/config/app_colors.dart';
 import '../../../core/providers/auth_provider.dart';
 
@@ -18,9 +17,9 @@ class ProfileLogoutButton extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.symmetric(vertical: 15),
           decoration: BoxDecoration(
-            color: AppColors.error.withOpacity(0.07),
+            color: AppColors.error.withAlpha(18),
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: AppColors.error.withOpacity(0.2)),
+            border: Border.all(color: AppColors.error.withAlpha(51)),
           ),
           child: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
