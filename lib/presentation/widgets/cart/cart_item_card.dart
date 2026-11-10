@@ -26,7 +26,7 @@ class CartItemCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withAlpha(13),
             blurRadius: 16,
             offset: const Offset(0, 4),
           ),
@@ -42,12 +42,12 @@ class CartItemCard extends StatelessWidget {
             child: Container(
               width: 70,
               height: 70,
-              color: AppColors.primary.withOpacity(0.06),
+              color: AppColors.primary.withAlpha(15),
               child: item.imageUrl != null
                   ? Image.network(
                       item.imageUrl!,
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => _placeholder(),
+                      errorBuilder: (_, _, _) => _placeholder(),
                     )
                   : _placeholder(),
             ),
@@ -81,7 +81,7 @@ class CartItemCard extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.all(4),
                         decoration: BoxDecoration(
-                          color: AppColors.error.withOpacity(0.08),
+                          color: AppColors.error.withAlpha(20),
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(
@@ -112,7 +112,7 @@ class CartItemCard extends StatelessWidget {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(30),
                         border: Border.all(
-                          color: AppColors.primary.withOpacity(0.3),
+                          color: AppColors.primary.withAlpha(77),
                           width: 1.5,
                         ),
                       ),

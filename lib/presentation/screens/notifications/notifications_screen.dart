@@ -83,7 +83,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             child: ListView.separated(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
               itemCount: provider.notifications.length,
-              separatorBuilder: (_, __) => const SizedBox(height: 10),
+              separatorBuilder: (_, _) => const SizedBox(height: 10),
               itemBuilder: (context, index) {
                 final notification = provider.notifications[index];
                 return _NotificationCard(
@@ -108,7 +108,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       await provider.markAsRead(notification.id);
     }
 
-    if (!mounted) return;
+    if (!context.mounted) return;
 
     final orderId = notification.orderId;
     if (orderId != null && orderId > 0) {
@@ -119,7 +119,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   Future<void> _markAllAsRead(BuildContext context) async {
     final success = await context.read<NotificationProvider>().markAllAsRead();
 
-    if (!mounted || success) return;
+    if (!context.mounted || success) return;
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
@@ -145,7 +145,7 @@ class _NotificationCard extends StatelessWidget {
 
     return Material(
       color: isUnread
-          ? AppColors.primary.withOpacity(0.04)
+          ? AppColors.primary.withAlpha(10)
           : AppColors.surface,
       borderRadius: BorderRadius.circular(16),
       child: InkWell(
@@ -157,7 +157,7 @@ class _NotificationCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: isUnread
-                  ? AppColors.primary.withOpacity(0.20)
+                  ? AppColors.primary.withAlpha(51)
                   : AppColors.border,
             ),
           ),
@@ -168,7 +168,7 @@ class _NotificationCard extends StatelessWidget {
                 width: 42,
                 height: 42,
                 decoration: BoxDecoration(
-                  color: priorityColor.withOpacity(0.10),
+                  color: priorityColor.withAlpha(26),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(

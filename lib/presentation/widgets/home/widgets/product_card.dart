@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../routes/app_routes.dart';
-import 'package:go_router/go_router.dart';
 import '../../../../models/product_model.dart';
 import '../../../../core/config/app_colors.dart';
 import '../../../../core/providers/cart_provider.dart';
@@ -21,7 +20,7 @@ class ProductCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(18),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.07),
+              color: Colors.black.withAlpha(18),
               blurRadius: 16,
               offset: const Offset(0, 4),
             ),
@@ -42,12 +41,12 @@ class ProductCard extends StatelessWidget {
                         ? Image.network(
                             product.imageUrl!,
                             fit: BoxFit.cover,
-                            errorBuilder: (_, __, ___) => _placeholder(),
+                            errorBuilder: (_, _, _) => _placeholder(),
                           )
                         : _placeholder(),
                     if (!product.isAvailable)
                       Container(
-                        color: Colors.black.withOpacity(0.4),
+                        color: Colors.black.withAlpha(102),
                         child: const Center(
                           child: Text(
                             'No disponible',

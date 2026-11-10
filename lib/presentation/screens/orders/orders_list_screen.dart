@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import '../../widgets/empty_state.dart';
 import '../../widgets/error_state.dart';
 import 'package:go_router/go_router.dart';
-import '../../../models/order_model.dart';
 import '../../../core/config/app_colors.dart';
 import '../../widgets/orders/order_card.dart';
 import '../../../core/providers/order_provider.dart';
@@ -57,7 +56,7 @@ class _OrdersListScreenState extends State<OrdersListScreen> {
                     width: 42,
                     height: 42,
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.08),
+                      color: AppColors.primary.withAlpha(20),
                       shape: BoxShape.circle,
                     ),
                     child: IconButton(

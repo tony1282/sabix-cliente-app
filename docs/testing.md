@@ -28,10 +28,14 @@ El workflow crea este archivo temporal desde el fixture.
   contraseña, confirmación, teléfono, nombre y usuario.
 - Botón compartido: pulsación, bloqueo durante carga y ausencia de acción,
   tanto en su variante principal como con borde.
+- Pantalla real de Notificaciones con servicios simulados: apertura de pedido,
+  tarjeta eliminada durante la espera, error al marcar todas y respuesta tardía
+  después de abandonar la pantalla.
 
 Se reemplaza la prueba inicial del contador porque no corresponde a Sabix.
 Estas pruebas no arrancan MyApp ni requieren red, credenciales o almacenamiento
-del dispositivo. No prueban login real, pedidos ni chat. Los componentes
+del dispositivo. La navegación de Notificaciones se prueba sin acceder al
+servidor; no prueban login real, operaciones de pedidos ni chat. Los componentes
 probados no necesitan cargar dotenv en memoria; el fixture satisface el
 recurso declarado por Flutter.
 

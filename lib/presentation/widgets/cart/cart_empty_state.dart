@@ -1,6 +1,5 @@
 import '../../routes/app_routes.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import '../../../core/config/app_colors.dart';
 
 class CartEmptyState extends StatelessWidget {
@@ -16,7 +15,7 @@ class CartEmptyState extends StatelessWidget {
             width: 90,
             height: 90,
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.07),
+              color: AppColors.primary.withAlpha(18),
               shape: BoxShape.circle,
             ),
             child: const Icon(
@@ -49,7 +48,7 @@ class CartEmptyState extends StatelessWidget {
                 borderRadius: BorderRadius.circular(14),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.primary.withOpacity(0.3),
+                    color: AppColors.primary.withAlpha(77),
                     blurRadius: 12,
                     offset: const Offset(0, 4),
                   ),

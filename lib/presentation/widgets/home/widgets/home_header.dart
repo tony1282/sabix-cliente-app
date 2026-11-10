@@ -49,7 +49,7 @@ class HomeHeader extends StatelessWidget {
                     width: 42,
                     height: 42,
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.08),
+                      color: AppColors.primary.withAlpha(20),
                       shape: BoxShape.circle,
                     ),
                     child: IconButton(
@@ -104,7 +104,7 @@ class HomeHeader extends StatelessWidget {
                     width: 42,
                     height: 42,
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.08),
+                      color: AppColors.primary.withAlpha(20),
                       shape: BoxShape.circle,
                     ),
                     child: IconButton(

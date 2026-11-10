@@ -21,13 +21,13 @@ class OrderCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(18),
           boxShadow: [
             BoxShadow(
-              color: AppColors.primary.withOpacity(0.07),
+              color: AppColors.primary.withAlpha(18),
               blurRadius: 14,
               offset: const Offset(0, 3),
             ),
           ],
           border: Border.all(
-            color: AppColors.primary.withOpacity(0.12),
+            color: AppColors.primary.withAlpha(31),
             width: 1,
           ),
         ),
@@ -40,15 +40,15 @@ class OrderCard extends StatelessWidget {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    _getStatusColor(order.status).withOpacity(0.15),
-                    _getStatusColor(order.status).withOpacity(0.05),
+                    _getStatusColor(order.status).withAlpha(38),
+                    _getStatusColor(order.status).withAlpha(13),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: _getStatusColor(order.status).withOpacity(0.2),
+                  color: _getStatusColor(order.status).withAlpha(51),
                   width: 1.5,
                 ),
               ),

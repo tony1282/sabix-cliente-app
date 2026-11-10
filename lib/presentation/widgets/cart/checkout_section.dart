@@ -43,7 +43,7 @@ class CheckoutSection extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.12),
+            color: AppColors.primary.withAlpha(31),
             blurRadius: 30,
             offset: const Offset(0, -8),
           ),
@@ -61,10 +61,10 @@ class CheckoutSection extends StatelessWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withOpacity(0.07),
+                  color: AppColors.primary.withAlpha(18),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                    color: AppColors.primary.withOpacity(0.3),
+                    color: AppColors.primary.withAlpha(77),
                     width: 1.5,
                   ),
                 ),
@@ -188,7 +188,7 @@ class CheckoutSection extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border(
                 top: BorderSide(
-                  color: AppColors.primary.withOpacity(0.12),
+                  color: AppColors.primary.withAlpha(31),
                   width: 1,
                 ),
               ),
@@ -232,8 +232,8 @@ class CheckoutSection extends StatelessWidget {
                   borderRadius: BorderRadius.circular(18),
                 ),
                 elevation: 0,
-                shadowColor: AppColors.primary.withOpacity(0.3),
-                disabledBackgroundColor: AppColors.primary.withOpacity(0.25),
+                shadowColor: AppColors.primary.withAlpha(77),
+                disabledBackgroundColor: AppColors.primary.withAlpha(64),
               ),
               child: cart.isLoading
                   ? const SizedBox(
@@ -300,7 +300,7 @@ class CheckoutSection extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: TextStyle(
-          color: AppColors.textSecondary.withOpacity(0.7),
+          color: AppColors.textSecondary.withAlpha(179),
           fontSize: 13,
         ),
         filled: true,

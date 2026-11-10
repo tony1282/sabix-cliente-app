@@ -107,9 +107,16 @@ hasta que el archivo exista en la rama predeterminada; no hace falta integrar
 para probarlo. Mientras permanezca solo en esta rama no protege todos los
 cambios de main ni se instala automáticamente en otras ramas antiguas.
 
-El análisis inicial detectó 100 avisos existentes (8 warnings y 92 info), por
-lo que el estado rojo de analyze es esperado hasta corregirlos en otro cambio.
-Las 32 pruebas Flutter pasaron localmente en el cambio anterior.
+El análisis inicial detectó 100 avisos existentes (8 warnings y 92 info).
+La limpieza posterior en esta misma rama los corrige sin desactivar reglas:
+imports sin usar, parámetros de callbacks, mensajes de diagnóstico y métodos
+de color obsoletos. Los colores conservan su valor alfa redondeado original.
+También se comprueba que el contexto concreto de una notificación siga montado
+antes de navegar o mostrar un mensaje después de una espera.
+
+Verificación local posterior: `flutter analyze` sin problemas y 36 pruebas
+Flutter aprobadas (incluye cuatro pruebas nuevas de Notificaciones). Una de
+ellas reproduce el error del contexto desmontado antes de la corrección.
 
 Pruebas locales del envío, sin red ni credenciales reales:
 

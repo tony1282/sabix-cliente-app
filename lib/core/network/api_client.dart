@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 // lib/core/network/api_client.dart
 import 'package:dio/dio.dart';
 import 'api_endpoints.dart';
@@ -72,23 +73,23 @@ class ApiClient {
   // ============================================
   Interceptor _loggingInterceptor() => InterceptorsWrapper(
     onRequest: (options, handler) {
-      print('📤 REQUEST: ${options.method} ${options.path}');
-      print('Headers: ${options.headers}');
+      debugPrint('📤 REQUEST: ${options.method} ${options.path}');
+      debugPrint('Headers: ${options.headers}');
       if (options.data != null) {
-        print('Data: ${options.data}');
+        debugPrint('Data: ${options.data}');
       }
       return handler.next(options);
     },
     onResponse: (response, handler) {
-      print('📥 RESPONSE: ${response.statusCode} ${response.realUri.path}');
-      print('Data: ${response.data}');
+      debugPrint('📥 RESPONSE: ${response.statusCode} ${response.realUri.path}');
+      debugPrint('Data: ${response.data}');
       return handler.next(response);
     },
     onError: (error, handler) {
-      print('❌ ERROR: ${error.message}');
+      debugPrint('❌ ERROR: ${error.message}');
       if (error.response != null) {
-        print('Status: ${error.response?.statusCode}');
-        print('Data: ${error.response?.data}');
+        debugPrint('Status: ${error.response?.statusCode}');
+        debugPrint('Data: ${error.response?.data}');
       }
       return handler.next(error);
     },

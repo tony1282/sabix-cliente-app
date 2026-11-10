@@ -52,14 +52,14 @@ class OrderDetailContent extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [AppColors.primary, AppColors.primary.withOpacity(0.8)],
+          colors: [AppColors.primary, AppColors.primary.withAlpha(204)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.3),
+            color: AppColors.primary.withAlpha(77),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
@@ -98,7 +98,7 @@ class OrderDetailContent extends StatelessWidget {
                 '${order.totalItems} productos',
                 style: TextStyle(
                   fontSize: 14,
-                  color: Colors.white.withOpacity(0.85),
+                  color: Colors.white.withAlpha(217),
                 ),
               ),
             ],
@@ -189,10 +189,10 @@ class OrderDetailContent extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: AppColors.primary.withOpacity(0.15)),
+        border: Border.all(color: AppColors.primary.withAlpha(38)),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.06),
+            color: AppColors.primary.withAlpha(15),
             blurRadius: 12,
             offset: const Offset(0, 3),
           ),
@@ -202,7 +202,7 @@ class OrderDetailContent extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 24,
-            backgroundColor: AppColors.primary.withOpacity(0.1),
+            backgroundColor: AppColors.primary.withAlpha(26),
             child: const Icon(
               Icons.delivery_dining_rounded,
               color: AppColors.primary,
@@ -244,7 +244,7 @@ class OrderDetailContent extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
-                disabledBackgroundColor: AppColors.primary.withOpacity(0.6),
+                disabledBackgroundColor: AppColors.primary.withAlpha(153),
                 elevation: 0,
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 shape: RoundedRectangleBorder(
@@ -278,7 +278,7 @@ class OrderDetailContent extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: order.items!.length,
-          separatorBuilder: (_, __) => const Divider(height: 16),
+          separatorBuilder: (_, _) => const Divider(height: 16),
           itemBuilder: (context, i) {
             final item = order.items![i];
             return OrderItemRow(
@@ -315,10 +315,10 @@ class OrderDetailContent extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.primary.withOpacity(0.15)),
+        border: Border.all(color: AppColors.primary.withAlpha(38)),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.06),
+            color: AppColors.primary.withAlpha(15),
             blurRadius: 12,
             offset: const Offset(0, 2),
           ),
@@ -329,7 +329,7 @@ class OrderDetailContent extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.1),
+              color: AppColors.primary.withAlpha(26),
               shape: BoxShape.circle,
             ),
             child: const Icon(
@@ -385,13 +385,13 @@ class OrderDetailContent extends StatelessWidget {
         borderRadius: BorderRadius.circular(18),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.06),
+            color: AppColors.primary.withAlpha(15),
             blurRadius: 12,
             offset: const Offset(0, 3),
           ),
         ],
         border: Border.all(
-          color: AppColors.primary.withOpacity(0.12),
+          color: AppColors.primary.withAlpha(31),
           width: 1.5,
         ),
       ),

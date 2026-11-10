@@ -40,7 +40,7 @@ class AuthProvider extends ChangeNotifier {
         }
       }
     } catch (e) {
-      print('Error loading user: $e');
+      debugPrint('Error loading user: $e');
     }
   }
 
@@ -252,7 +252,7 @@ class AuthProvider extends ChangeNotifier {
           return true;
         }
       } catch (e) {
-        print('Error checking auth: $e');
+        debugPrint('Error checking auth: $e');
       }
     }
     

@@ -91,7 +91,7 @@ class _CartContentState extends State<CartContent> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(24),
                               side: BorderSide(
-                                color: AppColors.error.withOpacity(0.2),
+                                color: AppColors.error.withAlpha(51),
                                 width: 1.5,
                               ),
                             ),
@@ -114,15 +114,15 @@ class _CartContentState extends State<CartContent> {
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            AppColors.primary.withOpacity(0.1),
-                            AppColors.primary.withOpacity(0.04),
+                            AppColors.primary.withAlpha(26),
+                            AppColors.primary.withAlpha(10),
                           ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
-                          color: AppColors.primary.withOpacity(0.15),
+                          color: AppColors.primary.withAlpha(38),
                           width: 1.5,
                         ),
                       ),
@@ -175,7 +175,7 @@ class _CartContentState extends State<CartContent> {
                                 Icon(
                                   Icons.shopping_cart_outlined,
                                   size: 56,
-                                  color: AppColors.textLight.withOpacity(0.5),
+                                  color: AppColors.textLight.withAlpha(128),
                                 ),
                                 const SizedBox(height: 12),
                                 Text(
